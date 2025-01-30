@@ -6,7 +6,7 @@ public class Lesson2Script : MonoBehaviour
 {
     [SerializeField] private string _value;
 
-    private List<string> _list;
+    private List<string> _list = new();
 
     [ContextMenu("Add to list")]
     private void AddToList()
@@ -18,13 +18,8 @@ public class Lesson2Script : MonoBehaviour
     [ContextMenu("Remove From list")]
     private void RemoveFromList()
     {
-        if (_list.Contains(_value))
-        {
-            _list.Remove(_value);
-            Debug.Log($"{_value} removed from list");
-        }
-        else
-            Debug.Log($"{_value} is not in list");
+        _list.Remove(_value);
+        Debug.Log($"{_value} removed from list");
     }
 
     [ContextMenu("Sort List")]
@@ -37,11 +32,19 @@ public class Lesson2Script : MonoBehaviour
     [ContextMenu("Print list")]
     private void PrintList()
     {
-        string msg = $"List: {_list[0]}";
-        for (int i = 1; i < _list.Count; i++) {
-            msg += $", {_list[i]}";
+        if (_list.Count < 1)
+        {
+            Debug.Log("List must not be empty, please add some values to it");
         }
-        Debug.Log(msg);
+        else
+        {
+            string msg = $"List: {_list[0]}";
+            for (int i = 1; i < _list.Count; i++)
+            {
+                msg += $", {_list[i]}";
+            }
+            Debug.Log(msg);
+        }
     }
 
     [ContextMenu("Clean list")]
